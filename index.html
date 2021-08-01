@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Частотность букв 2 [2k1dmg/letter-frequency2]</title>
+<style>
+#container {
+	display: flex;
+	justify-content: space-between;
+}
+#intext, #outtext {
+	min-height: 300px;
+	width: calc(50% - 28px);
+	padding: 10px;
+	margin-top: 10px;
+	word-wrap: break-word;
+}
+#intext {
+	outline: 0;
+	border: 1px solid #d9d9d9;
+}
+#intext:hover {
+	box-shadow: 0 1px 3px rgba(0,0,0,.3) inset;
+}
+#intext:focus {
+	border-color: #4d90fe;
+}
+#outtext {
+	background-color: whitesmoke;
+}
+@media only screen and (max-width: 768px) {
+	#container {
+		display: block;
+	}
+	#intext, #outtext {
+		width: calc(100% - 22px);
+		min-height: 150px;
+	}
+}
+#gitlink {
+	font-weight: bold;
+	font-family: monospace;
+	text-decoration: none;
+	color: #555;
+	position: absolute;
+	top: 5pt;
+	right: 5pt;
+}
+#gitlink:hover {
+	color: #222;
+}
+#gitlink:active {
+	color: #4169e1; 
+}
+input {
+	margin-bottom: 8px;
+}
+#options {
+	height: 17pt;
+}
+</style>
+<script>
+function initPage() {
+	var menuList = [
+		['Всех', '\\p{L}'],
+		['Латинских', '\\p{Script=Latin}'],
+		['Кириллических', '\\p{Script=Cyrillic}']
+	];
+	
+	menuList.forEach(function(item) {
+		options.appendChild(new Option(item[0], item[1]));
+	});
+	
+	options.onchange = function(event) {
+		re = new RegExp(options.options[options.options.selectedIndex].value, 'gu');
+		letterFrequency();
+	};
+	lettersCase.onchange = function(event) {
+		letterFrequency();
+	};
+	lettersTurk.onchange = function(event) {
+		letterFrequency();
+	};
+}
+var re = new RegExp('\\p{L}', 'gu');
+
+function getPercent(totalValue, value) {
+	return ((value / totalValue) * 100).toFixed(3);
+}
+
+function turkLetters(letter) {
+	switch(letter) {
+		case 'i':
+		case 'İ':
+			return 'i';
+		case 'ı':
+		case 'I':
+			return 'ı';
+	}
+	return letter.toLowerCase();
+}
+
+function letterFrequency() {
+	outtext.textContent = '';
+	
+	var text = intext.value;
+	if(text == '')
+		return;
+		
+	var lettersList = text.match(re);
+	
+	var letters = {};
+	for(let letter of lettersList) {
+		var letterLow;
+		if(lettersCase.checked) {
+			letterLow = letter;
+		}
+		else {
+			if(lettersTurk.checked) {
+				letterLow = turkLetters(letter);
+			}
+			else {
+				letterLow = letter.toLowerCase();
+			}
+		}
+		if(letters[letterLow]) {
+			letters[letterLow]++
+		}
+		else {
+			letters[letterLow] = 1;
+		}
+	}
+	
+	var sum = 0;
+	for(let num in letters) {
+		sum += parseInt(letters[num]);
+	}
+	
+	var lettersList = [];
+	for(let letter in letters) {
+		lettersList.push([letter, letters[letter], getPercent(sum, letters[letter])]);
+	}
+	lettersList.sort(function(a, b) {
+		return b[1] - a[1];
+	});
+	
+	outtext.textContent = lettersList.join('\n').replace(/,/g, '\t');
+}
+function clearAll() {
+	intext.value = '';
+	outtext.textContent = '';
+}
+function keyup(event) {
+	if(event.keyCode==13 && event.ctrlKey)
+	letterFrequency();
+}
+</script>
+</head>
+<body onkeyup="keyup(event)" onload="initPage()">
+<input type="button" name="letterFrequency" value="Подсчитать" title="ctrl + enter" onclick="letterFrequency();">
+частотность
+<select id="options"></select>
+букв
+<br>
+<input type="button" name="clearAll" value="Очистить" onclick="clearAll();"> |
+Регистр букв
+<input type="checkbox" name="lettersCase" id="lettersCase" title="Регистр букв"> |
+Буквы İ ı
+<input type="checkbox" name="lettersTurk" id="lettersTurk" title="Буквы İ ı">
+<div id="container">
+	<textarea id="intext" spellcheck="false"></textarea>
+	<pre id="outtext"></pre>
+	<a href="https://github.com/2k1dmg/letter-frequency2" id="gitlink" target="_blank" title="2k1dmg/letter-frequency2">GitHub</a>
+</div>
+</body></html>
