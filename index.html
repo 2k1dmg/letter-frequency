@@ -76,12 +76,12 @@ function initPage() {
 		letterFrequency();
 	};
 	lettersCase.onchange = function(event) {
-		letterFrequency();
 		optionsStat.lettersCase = lettersCase.checked;
+		letterFrequency();
 	};
 	lettersTurk.onchange = function(event) {
-		letterFrequency();
 		optionsStat.lettersTurk = lettersTurk.checked;
+		letterFrequency();
 	};
 }
 var re = new RegExp('\\p{L}', 'gu');
