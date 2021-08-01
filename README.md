@@ -1,2 +1,2 @@
-# letter-frequency2
+# Letter frequency 2
 letter frequency / частотность букв
