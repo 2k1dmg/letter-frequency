@@ -62,9 +62,19 @@ input {
 <script>
 function initPage() {
 	var menuList = [
-		['Всех', '\\p{L}'],
-		['Латинских', '\\p{Script=Latin}'],
-		['Кириллических', '\\p{Script=Cyrillic}']
+		['Всех букв', '\\p{L}'],
+		['Латиницы', '\\p{Script=Latin}'],
+		['Кириллицы', '\\p{Script=Cyrillic}'],
+		['Отметок', '\\p{M}'],
+		['Чисел', '\\p{N}'],
+		['Символов', '\\p{S}'],
+		['Пуктуации', '\\p{P}'],
+		['Разделителей', '\\p{Z}'],
+		['Другое', '\\p{C}'],
+		['Эмодзи', '\\p{Emoji_Presentation}'],
+		['Всех', '\\p{Any}'],
+		['Назначеных', '\\p{Assigned}'],
+		['ASCII', '\\p{ASCII}']
 	];
 	
 	menuList.forEach(function(item) {
@@ -93,6 +103,13 @@ var optionsStat = {
 
 function getPercent(totalValue, value) {
 	return ((value / totalValue) * 100).toFixed(3);
+}
+
+function getHEXcode(i) {
+	var string = i.codePointAt(0).toString(16);
+	while(string.length < 4)
+		string = '0' + string;
+	return string;
 }
 
 function turkLetters(letter) {
@@ -143,9 +160,9 @@ function letterFrequency() {
 		sum += parseInt(letters[num]);
 	}
 	
-	var lettersList = [];
+	var lettersList = [['char','cout','%','code','hex']];
 	for(let letter in letters) {
-		lettersList.push([letter, letters[letter], getPercent(sum, letters[letter])]);
+		lettersList.push([letter, letters[letter], getPercent(sum, letters[letter]), letter.codePointAt(0), getHEXcode(letter)]);
 	}
 	lettersList.sort(function(a, b) {
 		return b[1] - a[1];
@@ -167,7 +184,6 @@ function keyup(event) {
 <input type="button" name="letterFrequency" value="Подсчитать" title="ctrl + enter" onclick="letterFrequency();">
 частотность
 <select id="options"></select>
-букв
 <br>
 <input type="button" name="clearAll" value="Очистить" onclick="clearAll();"> |
 Регистр букв
