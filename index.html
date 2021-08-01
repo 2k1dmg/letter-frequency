@@ -112,6 +112,22 @@ function getHEXcode(i) {
 	return string;
 }
 
+function checkChar(str) {
+	switch(str.charCodeAt(0)) {
+		case 9:
+			return '[HT]';
+		case 10:
+			return '[LF]';
+		case 13:
+			return '[CR]';
+		case 32:
+			return '[Space]';
+		case 8206:
+			return '[LTRM]';	
+	}
+	return str;
+}
+
 function turkLetters(letter) {
 	switch(letter) {
 		case 'i':
@@ -165,7 +181,7 @@ function letterFrequency() {
 	
 	var lettersList = [['char','cout','%','code','hex']];
 	for(let letter in letters) {
-		lettersList.push([letter, letters[letter], getPercent(sum, letters[letter]), letter.codePointAt(0), getHEXcode(letter)]);
+		lettersList.push([checkChar(letter), letters[letter], getPercent(sum, letters[letter]), letter.codePointAt(0), getHEXcode(letter)]);
 	}
 	lettersList.sort(function(a, b) {
 		return b[1] - a[1];
