@@ -86,6 +86,8 @@ function initPage() {
 		letterFrequency();
 	};
 	lettersCase.onchange = function(event) {
+		lettersTurk.disabled = lettersCase.checked ? true : false;
+		
 		optionsStat.lettersCase = lettersCase.checked;
 		letterFrequency();
 	};
