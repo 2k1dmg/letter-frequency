@@ -77,12 +77,19 @@ function initPage() {
 	};
 	lettersCase.onchange = function(event) {
 		letterFrequency();
+		optionsStat.lettersCase = lettersCase.checked;
 	};
 	lettersTurk.onchange = function(event) {
 		letterFrequency();
+		optionsStat.lettersTurk = lettersTurk.checked;
 	};
 }
 var re = new RegExp('\\p{L}', 'gu');
+
+var optionsStat = {
+	lettersCase: false,
+	lettersTurk: false
+};
 
 function getPercent(totalValue, value) {
 	return ((value / totalValue) * 100).toFixed(3);
@@ -112,11 +119,11 @@ function letterFrequency() {
 	var letters = {};
 	for(let letter of lettersList) {
 		var letterLow;
-		if(lettersCase.checked) {
+		if(optionsStat.lettersCase) {
 			letterLow = letter;
 		}
 		else {
-			if(lettersTurk.checked) {
+			if(optionsStat.lettersTurk) {
 				letterLow = turkLetters(letter);
 			}
 			else {
