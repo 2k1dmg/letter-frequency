@@ -187,6 +187,8 @@ function letterFrequency() {
 		return b[1] - a[1];
 	});
 	
+	lettersList.push(['('+(lettersList.length-1)+')','('+sum+')']);
+	
 	lettersList = lettersList.map(function(a) {
 		return a.join('\t');
 	});
