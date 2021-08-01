@@ -133,6 +133,9 @@ function letterFrequency() {
 		
 	var lettersList = text.match(re);
 	
+	if(!lettersList)
+		return;
+	
 	var letters = {};
 	for(let letter of lettersList) {
 		var letterLow;
@@ -168,7 +171,11 @@ function letterFrequency() {
 		return b[1] - a[1];
 	});
 	
-	outtext.textContent = lettersList.join('\n').replace(/,/g, '\t');
+	lettersList = lettersList.map(function(a) {
+		return a.join('\t');
+	});
+	
+	outtext.textContent = lettersList.join('\n');
 }
 function clearAll() {
 	intext.value = '';
