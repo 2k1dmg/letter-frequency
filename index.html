@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Частотность букв 2 [2k1dmg/letter-frequency2]</title>
+<title>Letter frequency 2 [2k1dmg/letter-frequency2]</title>
 <style>
 #container {
 	display: flex;
@@ -63,18 +63,18 @@ input {
 <script>
 function initPage() {
 	var menuList = [
-		['Всех букв', '\\p{L}'],
-		['Латиницы', '\\p{Script=Latin}'],
-		['Кириллицы', '\\p{Script=Cyrillic}'],
-		['Отметок', '\\p{M}'],
-		['Чисел', '\\p{N}'],
-		['Символов', '\\p{S}'],
-		['Пунктуации', '\\p{P}'],
-		['Разделителей', '\\p{Z}'],
-		['Другое', '\\p{C}'],
-		['Эмодзи', '\\p{Emoji_Presentation}'],
-		['Любого', '\\p{Any}'],
-		['Назначенных', '\\p{Assigned}'],
+		['Letter', '\\p{L}'],
+		['Latin', '\\p{Script=Latin}'],
+		['Cyrillic', '\\p{Script=Cyrillic}'],
+		['Mark', '\\p{M}'],
+		['Number', '\\p{N}'],
+		['Symbol', '\\p{S}'],
+		['Punctuation', '\\p{P}'],
+		['Separator', '\\p{Z}'],
+		['Other', '\\p{C}'],
+		['Emoji', '\\p{Emoji_Presentation}'],
+		['Any', '\\p{Any}'],
+		['Assigned', '\\p{Assigned}'],
 		['ASCII', '\\p{ASCII}']
 	];
 	
@@ -209,15 +209,15 @@ function keyup(event) {
 </script>
 </head>
 <body onkeyup="keyup(event)" onload="initPage()">
-<input type="button" name="letterFrequency" value="Подсчитать" title="ctrl + enter" onclick="letterFrequency();">
-частотность
+<input type="button" name="letterFrequency" value="Count" title="ctrl + enter" onclick="letterFrequency();">
+frequency of
 <select id="options"></select>
 <br>
-<input type="button" name="clearAll" value="Очистить" onclick="clearAll();"> |
-Регистр букв
-<input type="checkbox" name="lettersCase" id="lettersCase" title="Регистр букв"> |
-Буквы İ ı
-<input type="checkbox" name="lettersTurk" id="lettersTurk" title="Буквы İ ı">
+<input type="button" name="clearAll" value="Clear" onclick="clearAll();"> |
+Case sensitive
+<input type="checkbox" name="lettersCase" id="lettersCase" title="Case sensitive"> |
+Letters «İ ı»
+<input type="checkbox" name="lettersTurk" id="lettersTurk" title="Letters «İ ı»">
 <div id="container">
 	<textarea id="intext" spellcheck="false"></textarea>
 	<pre id="outtext"></pre>
