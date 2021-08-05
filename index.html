@@ -61,6 +61,7 @@ input {
 }
 </style>
 <script>
+'use strict';
 function initPage() {
 	var menuList = [
 		['Letter', '\\p{L}'],
@@ -157,7 +158,7 @@ function letterFrequency() {
 	
 	var letters = {};
 	for(let letter of lettersList) {
-		var letterLow;
+		let letterLow;
 		if(optionsStat.lettersCase) {
 			letterLow = letter;
 		}
@@ -223,4 +224,5 @@ Letters «İ ı»
 	<pre id="outtext"></pre>
 	<a href="https://github.com/2k1dmg/letter-frequency2" id="gitlink" target="_blank" title="2k1dmg/letter-frequency2">GitHub</a>
 </div>
-</body></html>
+</body>
+</html>
