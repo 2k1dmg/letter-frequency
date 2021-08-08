@@ -220,12 +220,12 @@ function letterFrequency() {
 	lettersList.push(
 		['('+(lettersList.length-1)+')','('+sum+')'],
 		['-'],
-		['bytes:', bytesLength],
+		['bytes: '+ bytesLength],
 		['-']
 	);
 	
 	for(let i in charsByBytes) {
-		lettersList.push([i +' byte chars: ' + charsByBytes[i]]);
+		lettersList.push([i +' byte char: ' + charsByBytes[i]]);
 	}
 	
 	lettersList = lettersList.map(function(a) {
