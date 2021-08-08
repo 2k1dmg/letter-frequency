@@ -184,19 +184,49 @@ function letterFrequency() {
 	}
 	
 	var sum = 0;
-	for(let num in letters) {
-		sum += parseInt(letters[num]);
+	var bytesLength = 0;
+	var charsByBytes = {};
+	for(let letter in letters) {
+		let letterCount = parseInt(letters[letter]);
+		sum += letterCount;
+		let letterLength = unescape(encodeURIComponent(letter)).length;
+		bytesLength += letterCount * letterLength;
+		
+		if(charsByBytes[letterLength]) {
+			charsByBytes[letterLength] += letterCount;
+		}
+		else {
+			charsByBytes[letterLength] = letterCount;
+		}
 	}
 	
-	var lettersList = [['char','cout','%','code','hex']];
+	var lettersList = [['char','cout','%','code','hex','bytes']];
 	for(let letter in letters) {
-		lettersList.push([checkChar(letter), letters[letter], getPercent(sum, letters[letter]), letter.codePointAt(0), getHEXcode(letter)]);
+		lettersList.push(
+			[
+				checkChar(letter),
+				letters[letter],
+				getPercent(sum, letters[letter]),
+				letter.codePointAt(0),
+				getHEXcode(letter),
+				unescape(encodeURIComponent(letter)).length
+			]
+		);
 	}
 	lettersList.sort(function(a, b) {
 		return b[1] - a[1];
 	});
 	
-	lettersList.push(['('+(lettersList.length-1)+')','('+sum+')']);
+	lettersList.push(
+		['('+(lettersList.length-1)+')','('+sum+')'],
+		['-'],
+		['bytes:', bytesLength],
+		['-']
+	);
+	
+	for(let i in charsByBytes) {
+		lettersList.push([i +' byte chars: ' + charsByBytes[i]]);
+	}
 	
 	lettersList = lettersList.map(function(a) {
 		return a.join('\t');
