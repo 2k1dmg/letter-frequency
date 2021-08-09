@@ -149,6 +149,14 @@ function turkLetters(letter) {
 	return letter.toLowerCase();
 }
 
+function getLowerCaseLetters(letter) {
+	switch(letter) {
+		case 'İ':
+			return 'i';
+	}
+	return letter.toLowerCase();
+}
+
 function letterFrequency() {
 	outtext.textContent = '';
 	
@@ -172,7 +180,7 @@ function letterFrequency() {
 				letterLow = turkLetters(letter);
 			}
 			else {
-				letterLow = letter.toLowerCase();
+				letterLow = getLowerCaseLetters(letter);
 			}
 		}
 		if(letters[letterLow]) {
