@@ -115,10 +115,13 @@ function getPercent(totalValue, value) {
 }
 
 function getHEXcode(i) {
+	return i.codePointAt(0).toString(16).padStart(4, '0');
+	/*
 	var string = i.codePointAt(0).toString(16);
 	while(string.length < 4)
 		string = '0' + string;
 	return string;
+	*/
 }
 
 function checkChar(str) {
