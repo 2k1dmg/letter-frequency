@@ -211,9 +211,9 @@ function letterFrequency() {
 		}
 	}
 	
-	var lettersCout = [];
+	var lettersCount = [];
 	for(let letter in letters) {
-		lettersCout.push(
+		lettersCount.push(
 			[
 				checkChar(letter),
 				letters[letter],
@@ -224,13 +224,13 @@ function letterFrequency() {
 			]
 		);
 	}
-	lettersCout.sort(function(a, b) {
+	lettersCount.sort(function(a, b) {
 		return b[1] - a[1];
 	});
 	
-	lettersCout.unshift(['char','cout','%','code','hex','bytes']);
+	lettersCount.unshift(['char','cout','%','code','hex','bytes']);
 
-	lettersCout.push(
+	lettersCount.push(
 		['('+(lettersCout.length-1)+')','('+sum+')'],
 		['-'],
 		['bytes: '+ bytesLength],
@@ -238,14 +238,14 @@ function letterFrequency() {
 	);
 	
 	for(let i in charsByBytes) {
-		lettersCout.push([i +' byte char: ' + charsByBytes[i]]);
+		lettersCount.push([i +' byte char: ' + charsByBytes[i]]);
 	}
 	
-	lettersCout = lettersCout.map(function(a) {
+	lettersCount = lettersCount.map(function(a) {
 		return a.join('\t');
 	});
 	
-	outtext.textContent = lettersCout.join('\n');
+	outtext.textContent = lettersCount.join('\n');
 }
 function clearAll() {
 	intext.value = '';
