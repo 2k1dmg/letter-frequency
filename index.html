@@ -72,6 +72,7 @@ var param = {
 	lettersTurk: false,
 	re: /\p{L}/gu
 };
+
 function initPage() {
 	var menuList = [
 		['Letter', '\\p{L}'],
@@ -160,18 +161,7 @@ function getLowerCaseLetter(letter) {
 	return letter.toLowerCase();
 }
 
-function letterFrequency() {
-	outtext.textContent = '';
-	
-	var text = intext.value;
-	if(text == '')
-		return;
-		
-	var lettersList = text.match(param.re);
-	
-	if(!lettersList)
-		return;
-	
+function getLetters(lettersList) {
 	var letters = {};
 	for(let letter of lettersList) {
 		let letterLow;
@@ -193,7 +183,27 @@ function letterFrequency() {
 			letters[letterLow] = 1;
 		}
 	}
-	
+	return letters;
+}
+
+function getResult(sum, letters) {
+	var lettersCount = [];
+	for(let letter in letters) {
+		lettersCount.push(
+			[
+				checkChar(letter),
+				letters[letter],
+				getPercent(sum, letters[letter]),
+				letter.codePointAt(0),
+				getHEXcode(letter),
+				unescape(encodeURIComponent(letter)).length
+			]
+		);
+	}
+	return lettersCout;
+}
+
+function getSum(letters) {
 	var sum = 0;
 	var bytesLength = 0;
 	var charsByBytes = {};
@@ -210,20 +220,10 @@ function letterFrequency() {
 			charsByBytes[letterLength] = letterCount;
 		}
 	}
-	
-	var lettersCount = [];
-	for(let letter in letters) {
-		lettersCount.push(
-			[
-				checkChar(letter),
-				letters[letter],
-				getPercent(sum, letters[letter]),
-				letter.codePointAt(0),
-				getHEXcode(letter),
-				unescape(encodeURIComponent(letter)).length
-			]
-		);
-	}
+	return [sum, bytesLength, charsByBytes];
+}
+
+function showResult(lettersCout, sum, bytesLength, charsByBytes) {
 	lettersCount.sort(function(a, b) {
 		return b[1] - a[1];
 	});
@@ -245,12 +245,35 @@ function letterFrequency() {
 		return a.join('\t');
 	});
 	
-	outtext.textContent = lettersCount.join('\n');
+	outtext.textContent = lettersCount.join('\n');	
 }
+
+function letterFrequency() {
+	outtext.textContent = '';
+	
+	var text = intext.value;
+	if(text == '')
+		return;
+		
+	var lettersList = text.match(param.re);
+	
+	if(!lettersList)
+		return;
+	
+	var letters = getLetters(lettersList);
+
+	var [sum, bytesLength, charsByBytes] = getSum(letters);
+	
+	var lettersCout = getResult(sum, letters);
+	
+	showResult(lettersCout, sum, bytesLength, charsByBytes);
+}
+
 function clearAll() {
 	intext.value = '';
 	outtext.textContent = '';
 }
+
 function keyup(event) {
 	if(event.keyCode==13 && event.ctrlKey)
 		letterFrequency();
