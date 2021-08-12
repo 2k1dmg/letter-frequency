@@ -220,14 +220,13 @@ function getResult(sum, letters) {
 			]
 		);
 	}
+	lettersCount.sort(function(a, b) {
+		return b[1] - a[1];
+	});
 	return lettersCount;
 }
 
 function showResult(lettersCount, sum, bytesLength, charsByBytes) {
-	lettersCount.sort(function(a, b) {
-		return b[1] - a[1];
-	});
-	
 	lettersCount.unshift(['char','count','%','code','hex','byte']);
 
 	lettersCount.push(
