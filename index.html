@@ -200,7 +200,7 @@ function getResult(sum, letters) {
 			]
 		);
 	}
-	return lettersCout;
+	return lettersCount;
 }
 
 function getSum(letters) {
@@ -223,7 +223,7 @@ function getSum(letters) {
 	return [sum, bytesLength, charsByBytes];
 }
 
-function showResult(lettersCout, sum, bytesLength, charsByBytes) {
+function showResult(lettersCount, sum, bytesLength, charsByBytes) {
 	lettersCount.sort(function(a, b) {
 		return b[1] - a[1];
 	});
@@ -264,9 +264,9 @@ function letterFrequency() {
 
 	var [sum, bytesLength, charsByBytes] = getSum(letters);
 	
-	var lettersCout = getResult(sum, letters);
+	var lettersCount = getResult(sum, letters);
 	
-	showResult(lettersCout, sum, bytesLength, charsByBytes);
+	showResult(lettersCount, sum, bytesLength, charsByBytes);
 }
 
 function clearAll() {
