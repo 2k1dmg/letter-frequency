@@ -186,23 +186,6 @@ function getLetters(lettersList) {
 	return letters;
 }
 
-function getResult(sum, letters) {
-	var lettersCount = [];
-	for(let letter in letters) {
-		lettersCount.push(
-			[
-				checkChar(letter),
-				letters[letter],
-				getPercent(sum, letters[letter]),
-				letter.codePointAt(0),
-				getHEXcode(letter),
-				unescape(encodeURIComponent(letter)).length
-			]
-		);
-	}
-	return lettersCount;
-}
-
 function getSum(letters) {
 	var sum = 0;
 	var bytesLength = 0;
@@ -221,6 +204,23 @@ function getSum(letters) {
 		}
 	}
 	return [sum, bytesLength, charsByBytes];
+}
+
+function getResult(sum, letters) {
+	var lettersCount = [];
+	for(let letter in letters) {
+		lettersCount.push(
+			[
+				checkChar(letter),
+				letters[letter],
+				getPercent(sum, letters[letter]),
+				letter.codePointAt(0),
+				getHEXcode(letter),
+				unescape(encodeURIComponent(letter)).length
+			]
+		);
+	}
+	return lettersCount;
 }
 
 function showResult(lettersCount, sum, bytesLength, charsByBytes) {
