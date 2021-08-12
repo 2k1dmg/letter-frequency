@@ -67,6 +67,11 @@ input {
 </style>
 <script>
 'use strict';
+var param = {
+	lettersCase: false,
+	lettersTurk: false,
+	re: /\p{L}/gu
+};
 function initPage() {
 	var menuList = [
 		['Letter', '\\p{L}'],
@@ -85,30 +90,25 @@ function initPage() {
 	];
 	
 	menuList.forEach(function(item) {
-		options.appendChild(new Option(item[0], item[1]));
+		countMenu.appendChild(new Option(item[0], item[1]));
 	});
 	
 	options.onchange = function(event) {
-		re = new RegExp(options.options[options.options.selectedIndex].value, 'gu');
+		var index = countMenu.options.selectedIndex;
+		param.re = new RegExp(countMenu.options[index].value, 'gu');
 		letterFrequency();
 	};
 	lettersCase.onchange = function(event) {
 		lettersTurk.disabled = lettersCase.checked ? true : false;
 		
-		optionsStat.lettersCase = lettersCase.checked;
+		param.lettersCase = lettersCase.checked;
 		letterFrequency();
 	};
 	lettersTurk.onchange = function(event) {
-		optionsStat.lettersTurk = lettersTurk.checked;
+		param.lettersTurk = lettersTurk.checked;
 		letterFrequency();
 	};
 }
-var re = new RegExp('\\p{L}', 'gu');
-
-var optionsStat = {
-	lettersCase: false,
-	lettersTurk: false
-};
 
 function getPercent(totalValue, value) {
 	return ((value / totalValue) * 100).toFixed(3);
@@ -167,7 +167,7 @@ function letterFrequency() {
 	if(text == '')
 		return;
 		
-	var lettersList = text.match(re);
+	var lettersList = text.match(param.re);
 	
 	if(!lettersList)
 		return;
@@ -175,11 +175,11 @@ function letterFrequency() {
 	var letters = {};
 	for(let letter of lettersList) {
 		let letterLow;
-		if(optionsStat.lettersCase) {
+		if(param.lettersCase) {
 			letterLow = letter;
 		}
 		else {
-			if(optionsStat.lettersTurk) {
+			if(param.lettersTurk) {
 				letterLow = turkLetters(letter);
 			}
 			else {
@@ -260,7 +260,7 @@ function keyup(event) {
 <body onkeyup="keyup(event)" onload="initPage()">
 <input type="button" name="letterFrequency" value="Count" title="ctrl + enter" onclick="letterFrequency();">
 frequency of
-<select id="options"></select>
+<select id="countMenu"></select>
 <br>
 <input type="button" name="clearAll" value="Clear" onclick="clearAll();"> |
 Case sensitivity
