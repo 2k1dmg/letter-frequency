@@ -93,7 +93,7 @@ function initPage() {
 		countMenu.appendChild(new Option(item[0], item[1]));
 	});
 	
-	options.onchange = function(event) {
+	countMenu.onchange = function(event) {
 		var index = countMenu.options.selectedIndex;
 		param.re = new RegExp(countMenu.options[index].value, 'gu');
 		letterFrequency();
