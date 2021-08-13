@@ -131,10 +131,16 @@ function checkChar(str) {
 			return '[HT]';
 		case 10:
 			return '[LF]';
+		case 11:
+			return '[VT]';
+		case 12:
+			return '[FF]';
 		case 13:
 			return '[CR]';
 		case 32:
 			return '[Space]';
+		case 160:
+			return '[NBS]';
 		case 8206:
 			return '[LTRM]';	
 	}
