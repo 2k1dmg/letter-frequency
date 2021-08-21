@@ -289,13 +289,13 @@ function keyup(event) {
 </head>
 <body onkeyup="keyup(event)" onload="initPage()">
 <input type="button" name="letterFrequency" value="Count" title="ctrl + enter" onclick="letterFrequency();">
-frequency of
+<label>frequency of</label>
 <select id="countMenu"></select>
 <br>
-<input type="button" name="clearAll" value="Clear" onclick="clearAll();"> |
-Case sensitivity
-<input type="checkbox" name="lettersCase" id="lettersCase" title="Case sensitivity"> |
-Letters «İ ı»
+<input type="button" name="clearAll" value="Clear" onclick="clearAll();">
+<label for="lettersCase">Case sensitivity</label>
+<input type="checkbox" name="lettersCase" id="lettersCase" title="Case sensitivity">
+<label for="lettersTurk">Letters «İ ı»</label>
 <input type="checkbox" name="lettersTurk" id="lettersTurk" title="Letters «İ ı»">
 <div id="container">
 	<textarea id="intext" spellcheck="false" onpaste="setTimeout(letterFrequency, 10);"></textarea>
