@@ -169,6 +169,10 @@ function getLowerCaseLetter(letter) {
 	return letter.toLowerCase();
 }
 
+funtion getBytesLengthOf(char) {
+	return unescape(encodeURIComponent(char)).length;
+}
+
 function getLetters(lettersList) {
 	var letters = {};
 	for(let letter of lettersList) {
@@ -201,7 +205,7 @@ function getSum(letters) {
 	for(let letter in letters) {
 		let letterCount = parseInt(letters[letter]);
 		sum += letterCount;
-		let letterLength = unescape(encodeURIComponent(letter)).length;
+		let letterLength = getBytesLengthOf(letter);
 		bytesLength += letterCount * letterLength;
 		
 		if(charsByBytes[letterLength]) {
@@ -224,7 +228,7 @@ function getResult(sum, letters) {
 				getPercent(sum, letters[letter]),
 				letter.codePointAt(0),
 				getHEXcodeOf(letter),
-				unescape(encodeURIComponent(letter)).length
+				getBytesLengthOf(letter)
 			]
 		);
 	}
