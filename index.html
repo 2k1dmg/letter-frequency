@@ -117,8 +117,8 @@ function getPercent(totalValue, value) {
 	return ((value / totalValue) * 100).toFixed(3);
 }
 
-function getHEXcode(i) {
-	return i.codePointAt(0).toString(16).padStart(4, '0');
+function getHEXcodeOf(char) {
+	return char.codePointAt(0).toString(16).padStart(4, '0');
 	/*
 	var string = i.codePointAt(0).toString(16);
 	while(string.length < 4)
@@ -127,8 +127,8 @@ function getHEXcode(i) {
 	*/
 }
 
-function checkChar(str) {
-	switch(str.charCodeAt(0)) {
+function checkVisibilityOf(char) {
+	switch(char.charCodeAt(0)) {
 		case 9:
 			return '[HT]';
 		case 10:
@@ -146,7 +146,7 @@ function checkChar(str) {
 		case 8206:
 			return '[LTRM]';	
 	}
-	return str;
+	return char;
 }
 
 function turkLetters(letter) {
@@ -219,11 +219,11 @@ function getResult(sum, letters) {
 	for(let letter in letters) {
 		lettersCount.push(
 			[
-				checkChar(letter),
+				checkVisibilityOf(letter),
 				letters[letter],
 				getPercent(sum, letters[letter]),
 				letter.codePointAt(0),
-				getHEXcode(letter),
+				getHEXcodeOf(letter),
 				unescape(encodeURIComponent(letter)).length
 			]
 		);
