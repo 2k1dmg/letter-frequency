@@ -251,7 +251,13 @@ function showResult(lettersCount, sum, bytesLength, charsByBytes) {
 	for(let i in charsByBytes) {
 		lettersCount.push([i +' byte char: ' + charsByBytes[i]]);
 	}
-	
+
+	var timeEnd = Date.now();
+	lettersCount.push(
+		[''],
+		['time: '+ ((timeEnd - timeStart)/1000) + ' seconds']
+	);
+
 	lettersCount = lettersCount.map(function(a) {
 		return a.join('\t');
 	});
@@ -270,7 +276,9 @@ function letterFrequency() {
 	
 	if(!lettersList)
 		return;
-	
+
+	var timeStart = Date.now();
+
 	var letters = getLetters(lettersList);
 
 	var [sum, bytesLength, charsByBytes] = getSum(letters);
