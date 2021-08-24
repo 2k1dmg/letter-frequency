@@ -267,17 +267,16 @@ function showResult(lettersCount, sum, bytesLength, charsByBytes, timeStart) {
 
 function letterFrequency() {
 	outtext.textContent = '';
-	
-	var text = intext.value;
-	if(text == '')
-		return;
-		
-	var lettersList = text.match(param.re);
-	
-	if(!lettersList)
+
+	if(intext.value == '')
 		return;
 
 	var timeStart = Date.now();
+	
+	var lettersList = intext.value.match(param.re);
+
+	if(!lettersList)
+		return;
 
 	var letters = getLetters(lettersList);
 
