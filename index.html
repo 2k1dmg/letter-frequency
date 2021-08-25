@@ -101,7 +101,7 @@ function initPage() {
 	countMenu.onchange = function(event) {
 		var index = countMenu.options.selectedIndex;
 		var value = countMenu.options[index].value;
-		var flag = /^\\p/.test(value) ? 'gu' : 'g';
+		var flag = /^\\p/i.test(value) ? 'gu' : 'g';
 		param.re = new RegExp(value, flag);
 		letterFrequency();
 	};
