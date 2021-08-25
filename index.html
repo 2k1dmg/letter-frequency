@@ -89,7 +89,9 @@ function initPage() {
 		['Emoji', '\\p{Emoji_Presentation}'],
 		['Any', '\\p{Any}'],
 		['Assigned', '\\p{Assigned}'],
-		['ASCII', '\\p{ASCII}']
+		['ASCII', '\\p{ASCII}'],
+		['Latin English', '[A-Za-z]'],
+		['Cyrillic Russian', '[А-ЯЁа-яё]']
 	];
 	
 	menuList.forEach(function(item) {
@@ -98,7 +100,9 @@ function initPage() {
 	
 	countMenu.onchange = function(event) {
 		var index = countMenu.options.selectedIndex;
-		param.re = new RegExp(countMenu.options[index].value, 'gu');
+		var value = countMenu.options[index].value;
+		var flag = /p/.test(value) ? 'gu' : 'g';
+		param.re = new RegExp(value, flag);
 		letterFrequency();
 	};
 	lettersCase.onchange = function(event) {
