@@ -69,6 +69,25 @@ input {
 </style>
 <script>
 'use strict';
+
+const countMenuList = [
+	['Letter', '\\p{L}'],
+	['Latin', '\\p{Script=Latin}'],
+	['Cyrillic', '\\p{Script=Cyrillic}'],
+	['Mark', '\\p{M}'],
+	['Number', '\\p{N}'],
+	['Symbol', '\\p{S}'],
+	['Punctuation', '\\p{P}'],
+	['Separator', '\\p{Z}'],
+	['Other', '\\p{C}'],
+	['Emoji', '\\p{Emoji_Presentation}'],
+	['Any', '\\p{Any}'],
+	['Assigned', '\\p{Assigned}'],
+	['ASCII', '\\p{ASCII}'],
+	['Latin English', '[A-Za-z]'],
+	['Cyrillic Russian', '[А-ЯЁа-яё]']
+];
+
 let param = {
 	lettersCase: false,
 	lettersTurk: false,
@@ -76,23 +95,7 @@ let param = {
 };
 
 function initPage() {
-	let menuList = [
-		['Letter', '\\p{L}'],
-		['Latin', '\\p{Script=Latin}'],
-		['Cyrillic', '\\p{Script=Cyrillic}'],
-		['Mark', '\\p{M}'],
-		['Number', '\\p{N}'],
-		['Symbol', '\\p{S}'],
-		['Punctuation', '\\p{P}'],
-		['Separator', '\\p{Z}'],
-		['Other', '\\p{C}'],
-		['Emoji', '\\p{Emoji_Presentation}'],
-		['Any', '\\p{Any}'],
-		['Assigned', '\\p{Assigned}'],
-		['ASCII', '\\p{ASCII}'],
-		['Latin English', '[A-Za-z]'],
-		['Cyrillic Russian', '[А-ЯЁа-яё]']
-	];
+	let menuList = countMenuList;
 	
 	menuList.forEach(function(item) {
 		countMenu.appendChild(new Option(item[0], item[1]));
