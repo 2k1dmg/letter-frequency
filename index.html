@@ -70,7 +70,7 @@ input {
 <script>
 'use strict';
 
-const countMenuList = [
+const MENU_LIST = [
 	['Letter', '\\p{L}'],
 	['Latin', '\\p{Script=Latin}'],
 	['Cyrillic', '\\p{Script=Cyrillic}'],
@@ -95,9 +95,7 @@ let param = {
 };
 
 function initPage() {
-	let menuList = countMenuList;
-	
-	menuList.forEach(function(item) {
+	MENU_LIST.forEach(function(item) {
 		countMenu.appendChild(new Option(item[0], item[1]));
 	});
 	
