@@ -69,14 +69,14 @@ input {
 </style>
 <script>
 'use strict';
-var param = {
+let param = {
 	lettersCase: false,
 	lettersTurk: false,
 	re: /\p{L}/gu
 };
 
 function initPage() {
-	var menuList = [
+	let menuList = [
 		['Letter', '\\p{L}'],
 		['Latin', '\\p{Script=Latin}'],
 		['Cyrillic', '\\p{Script=Cyrillic}'],
@@ -99,9 +99,9 @@ function initPage() {
 	});
 	
 	countMenu.onchange = function(event) {
-		var index = countMenu.options.selectedIndex;
-		var value = countMenu.options[index].value;
-		var flag = /^\\p/i.test(value) ? 'gu' : 'g';
+		let index = countMenu.options.selectedIndex;
+		let value = countMenu.options[index].value;
+		let flag = /^\\p/i.test(value) ? 'gu' : 'g';
 		param.re = new RegExp(value, flag);
 		letterFrequency();
 	};
@@ -123,12 +123,6 @@ function getPercent(totalValue, value) {
 
 function getHEXcodeOf(char) {
 	return char.codePointAt(0).toString(16).padStart(4, '0');
-	/*
-	var string = i.codePointAt(0).toString(16);
-	while(string.length < 4)
-		string = '0' + string;
-	return string;
-	*/
 }
 
 function checkVisibilityOf(char) {
@@ -178,7 +172,7 @@ function getBytesLengthOf(char) {
 }
 
 function getLetters(lettersList) {
-	var letters = {};
+	let letters = {};
 	for(let letter of lettersList) {
 		let letterLow;
 		if(param.lettersCase) {
@@ -203,9 +197,9 @@ function getLetters(lettersList) {
 }
 
 function getSum(letters) {
-	var sum = 0;
-	var bytesLength = 0;
-	var charsByBytes = {};
+	let sum = 0;
+	let bytesLength = 0;
+	let charsByBytes = {};
 	for(let letter in letters) {
 		let letterCount = parseInt(letters[letter]);
 		sum += letterCount;
@@ -223,7 +217,7 @@ function getSum(letters) {
 }
 
 function getResult(sum, letters) {
-	var lettersCount = [];
+	let lettersCount = [];
 	for(let letter in letters) {
 		lettersCount.push(
 			[
@@ -256,7 +250,7 @@ function showResult(lettersCount, sum, bytesLength, charsByBytes, timeStart) {
 		lettersCount.push([i +' byte char: ' + charsByBytes[i]]);
 	}
 
-	var timeEnd = Date.now();
+	let timeEnd = Date.now();
 	lettersCount.push(
 		[''],
 		['time: '+ ((timeEnd - timeStart)/1000) + ' seconds']
@@ -275,18 +269,18 @@ function letterFrequency() {
 	if(intext.value == '')
 		return;
 
-	var timeStart = Date.now();
+	let timeStart = Date.now();
 	
-	var lettersList = intext.value.match(param.re);
+	let lettersList = intext.value.match(param.re);
 
 	if(!lettersList)
 		return;
 
-	var letters = getLetters(lettersList);
+	let letters = getLetters(lettersList);
 
-	var [sum, bytesLength, charsByBytes] = getSum(letters);
+	let [sum, bytesLength, charsByBytes] = getSum(letters);
 	
-	var lettersCount = getResult(sum, letters);
+	let lettersCount = getResult(sum, letters);
 	
 	showResult(lettersCount, sum, bytesLength, charsByBytes, timeStart);
 }
