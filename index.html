@@ -274,8 +274,10 @@ function letterFrequency() {
 	
 	let lettersList = intext.value.match(param.re);
 
-	if(!lettersList)
+	if(!lettersList) {
+		outtext.textContent = 'There is no match with the current counting option.';
 		return;
+	}
 
 	let letters = getLetters(lettersList);
 
