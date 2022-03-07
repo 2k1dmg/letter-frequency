@@ -142,8 +142,12 @@ function checkVisibilityOf(char) {
 			return '[space]';
 		case 160:
 			return '[NBS]';
+		case 8205:
+			return '[ZWJ]';
 		case 8206:
-			return '[LTRM]';	
+			return '[LTRM]';
+		case 65039:
+			return '[VS16]';
 	}
 	return char;
 }
