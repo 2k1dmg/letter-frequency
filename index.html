@@ -12,7 +12,7 @@
 	justify-content: space-between;
 }
 #intext, #outtext {
-	min-height: 300px;
+	min-height: 400px;
 	width: calc(50% - 28px);
 	padding: 10px;
 	margin-top: 10px;
@@ -21,6 +21,9 @@
 #intext {
 	outline: 0;
 	border: 1px solid #d9d9d9;
+	max-width: calc(50% - 30px);
+	min-width: calc(50% - 30px);
+	max-height: 600px;
 }
 #intext:hover {
 	box-shadow: 0 1px 3px rgba(0,0,0,.3) inset;
@@ -31,11 +34,15 @@
 #outtext {
 	background-color: whitesmoke;
 	overflow-y: scroll;
-	height: 400px;
+	max-height: 600px;
 }
 @media only screen and (max-width: 768px) {
 	#container {
 		display: block;
+	}
+	#intext {
+		max-width: calc(100% - 20px);
+		min-width: calc(100% - 20px);
 	}
 	#intext, #outtext {
 		width: calc(100% - 22px);
