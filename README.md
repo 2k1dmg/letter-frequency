@@ -1,2 +1,2 @@
-# Letter frequency 2
+# Letter frequency
 letter frequency
