@@ -278,10 +278,10 @@ function showResult(lettersCount, sum, bytesLength, charsByBytes, timeStart) {
 }
 
 function letterFrequency() {
-	outtext.textContent = '';
-
 	if(intext.value == '')
 		return;
+
+	outtext.textContent = '';
 
 	let timeStart = Date.now();
 	
