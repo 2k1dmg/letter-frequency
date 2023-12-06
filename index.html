@@ -80,7 +80,9 @@ input {
 const MENU_LIST = [
 	['Letter', '\\p{L}'],
 	['Latin', '\\p{Script=Latin}'],
+	['Non Latin', '\\p{L}'],
 	['Cyrillic', '\\p{Script=Cyrillic}'],
+	['Non Cyrillic', '\\p{L}'],
 	['Mark', '\\p{M}'],
 	['Number', '\\p{N}'],
 	['Symbol', '\\p{S}'],
@@ -285,7 +287,19 @@ function letterFrequency() {
 
 	let timeStart = Date.now();
 	
-	let lettersList = intext.value.match(param.re);
+	let lettersList;
+	let index = countMenu.options.selectedIndex;
+	let selected = countMenu.options[index].text;
+	switch(selected) {
+		case 'Non Latin':
+			lettersList = intext.value.replace(/\p{Script=Latin}/gu,'').match(param.re);
+			break;
+		case 'Non Cyrillic':
+			lettersList = intext.value.replace(/\p{Script=Cyrillic}/gu,'').match(param.re);
+			break;
+		default:
+			lettersList = intext.value.match(param.re);
+	}
 
 	if(!lettersList) {
 		outtext.textContent = 'There is no match with the current counting option.';
